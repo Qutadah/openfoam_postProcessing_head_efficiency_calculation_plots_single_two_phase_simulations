@@ -1,0 +1,202 @@
+from matplotlib import pyplot as plt
+import numpy as np
+import tikzplotlib
+
+# plt.rcParams.update({"text.usetex": True, "font.family": "sans-serif", "font.sans-serif": ["Helvetica"]})
+
+
+############################################################################################################
+########################################## EXP - 0.50 mm GAP ###############################################
+
+
+Q_opt = 68.1064652357081
+H_opt = 17.1704258430048
+eta_opt = 0.7023
+
+exp_half_mm_flowrate = [6.89464646102859, 14.2686652014031, 17.2288667358457, 21.5479952231049, 28.0522350355983,
+                        35.2673452667893, 42.0868242107333, 48.8784127257766, 51.9811160065236, 56.1568048916759,
+                        63.1267549231651, 69.5698218554261, 77.2707991436126, 84.0677778184416, 87.6790830254556,
+                        90.5895963817836, 97.9094735667109, 105.172865925729, 111.976406811178, 119.407409442961,
+                        124.745117737353]
+# exp_half_mm_flowrate= [exp_half_mm_flowrate[i]/Q_opt for i in range(len(exp_half_mm_flowrate))]
+
+exp_half_mm_head = [21.1146138887379, 20.993950351609, 20.9798530902766, 20.9251483889966, 20.807426452755,
+                    20.2970005213201, 19.7418097315093, 19.2064461186863, 18.9300586319689, 18.5206725167313,
+                    17.8372860128804, 17.1044467253123, 16.0286641554157, 14.9991892587307, 14.5207763624296,
+                    14.0643244723086, 12.8545886078348, 11.8486468664026, 10.420036509964, 8.34241220730105,
+                    6.56128268977679]
+# exp_half_mm_head= [exp_half_mm_head[i]/H_opt for i in range(len(exp_half_mm_head))]
+
+exp_half_mm_eta = [0.174500478825753, 0.326911769359996, 0.376383900459926, 0.440459959734526, 0.523654614162655,
+                   0.593778663473744, 0.640391795097851, 0.678566315158144, 0.68901150907363, 0.692764377071364,
+                   0.705466759461417, 0.70217649145557, 0.691745670720509, 0.675363524994291, 0.669211095428003,
+                   0.656805347326249, 0.629629309973216, 0.604821507624601, 0.556484748824163, 0.469382934266746,
+                   0.38564853411593]
+exp_half_mm_eta = [exp_half_mm_eta[i] * 100 for i in range(len(exp_half_mm_eta))]
+
+######################## simulation
+
+sim_flowrate = [15, 34, 68, 102, 120]
+# sim_flowrate= [sim_flowrate[i]/Q_opt for i in range(len(sim_flowrate))]
+
+sim_head = [18.885819, 21.030547, 18.541008, 13.723238, 9.587210]
+# sim_head= [sim_head[i]/H_opt for i in range(len(sim_head))]
+
+# Qw= 15 values are wrong, correct
+sim_eta = [0.21435, 0.49785, 0.64857, 0.59130, 0.46320]
+# sim_eta= [sim_eta[i]/eta_opt for i in range(len(sim_eta))]
+
+### plotting head curve
+
+plt.plot(exp_half_mm_flowrate, exp_half_mm_head, color='k', linestyle='--', marker='^', label='Experiment- 0.5mm gap')
+# plt.plot(sim_flowrate, sim_head, color='b', label='Simulation @ $\epsilon=0$')
+
+plt.plot(15, 18.885819, 'o', color='r')
+plt.plot(34, 21.030547, 'o', color='r', label=('Qw = 68 m3/h'))
+plt.plot(68, 18.541008, 'o', color='r')
+plt.plot(102, 13.723238, 'o', color='r')
+plt.plot(120, 9.587210, 'o', color='r')
+
+plt.xlabel('$Q$')
+plt.ylabel('$H$')
+
+plt.title("Head-Volumetric Flowrate Characteristic Plot")
+plt.legend()
+
+txt = "Experimental values - vs. simulation results"
+plt.figtext(0.6, -0.05, txt, wrap=True, horizontalalignment='center', fontsize=12)
+tikzplotlib.save('head_plot_0.5mm_exp.tex')
+
+plt.savefig('head_plot_0.5mm_exp.eps', format='eps', dpi=1000)
+
+plt.show()
+
+plt.savefig("head_plot_0.5mm_exp.png")
+
+####### plotting efficiency curve
+
+plt.plot(exp_half_mm_flowrate, exp_half_mm_eta, color='k', linestyle='--', marker='^', label='Experiment- 0.5mm gap')
+# plt.plot(sim_flowrate, sim_eta, color='b', label='Simulation @ $\epsilon=0$')
+
+
+plt.plot(15, 21.435, 'o', color='r')
+plt.plot(34, 49.785, 'o', color='r', label=('Qw = 68 m3/h'))
+plt.plot(68, 64.857, 'o', color='r')
+plt.plot(102, 59.130, 'o', color='r')
+plt.plot(120, 46.320, 'o', color='r')
+
+plt.xlabel('$Q$')
+plt.ylabel('$\eta$')
+
+plt.title("Efficiency-Volumetric Flowrate Characteristic Plot")
+plt.legend()
+
+txt = "Experimental values- vs. simulation results"
+plt.figtext(0.6, -0.05, txt, wrap=True, horizontalalignment='center', fontsize=12)
+tikzplotlib.save('efficiency_plot_0.5mm_exp.tex')
+
+plt.savefig('efficiency_plot_0.5mm_exp.eps', format='eps', dpi=1000)
+
+plt.show()
+
+plt.savefig("efficiency_plot_0.5mm_exp.png")
+
+############################################################################################################
+########################################## EXP - 1.00 mm GAP ###############################################
+
+
+# plt.rcParams.update({"text.usetex": True, "font.family": "sans-serif", "font.sans-serif": ["Helvetica"]})
+
+# fig, (ax1, ax2) = plt.subplots(1, 2)
+# fig.suptitle('Horizontally stacked subplots')
+# ax1.plot(x, y)
+# ax2.plot(x, -y)
+
+
+Q_opt = 65.8835691605852
+H_opt = 16.6082617491909
+eta_opt = 0.67109
+
+exp_1mm_flowrate = [6.89136516479774, 14.6736715355887, 17.9943470604717, 21.3258043251931, 28.5252111073584,
+                    36.2597043015064, 43.7612249091269, 49.2646684072914, 53.1155084207656, 56.5500921517613,
+                    63.9484865725043, 70.2809266135099, 77.1817352384331, 84.4099706172945, 87.9814318329097,
+                    92.1027444809676, 99.3026195600628, 105.178959867358, 112.978609701991, 120.993595770001]
+# exp_1mm_flowrate= [exp_1mm_flowrate[i]/Q_opt for i in range(len(exp_1mm_flowrate))]
+
+exp_1mm_head = [20.7833880094633, 20.6714514168378, 20.6277555441301, 20.5214914573976, 20.2485296668251,
+                19.5815715766819, 18.9399998050011, 18.4934326690508, 18.1091805139214, 17.7610705761421,
+                16.9032639117875, 16.0697203931243, 15.0965791852244, 13.9735055934955, 13.4653257040837,
+                12.8242034800348, 11.589052891273, 10.3980195580552, 8.72433370104207, 6.29888014443649]
+# exp_1mm_head= [exp_1mm_head[i]/H_opt for i in range(len(exp_1mm_head))]
+
+
+exp_1mm_eta = [0.170948593684357, 0.326165250990398, 0.380304663741982, 0.427069156960923, 0.515307640308582,
+               0.582613433337575, 0.628117477023122, 0.653377812879519, 0.66077879260541, 0.665759899695237,
+               0.671117713078994, 0.664902911221885, 0.658691499985318, 0.639534093357495, 0.631379439517751,
+               0.618882739951461, 0.583538697476478, 0.547126101428541, 0.487730166298129, 0.375489911550044]
+# exp_1mm_eta= [exp_1mm_eta[i]*100 for i in range(len(exp_1mm_eta))]
+######################## simulation
+
+sim_flowrate = [15, 34, 68, 102, 120]
+# sim_flowrate= [sim_flowrate[i]/Q_opt for i in range(len(sim_flowrate))]
+
+sim_head = [18.885819, 21.030547, 18.541008, 13.723238, 9.587210]
+# sim_head= [sim_head[i]/H_opt for i in range(len(sim_head))]
+
+# Qw= 15 values are wrong, correct
+sim_eta = [0.21435, 0.49785, 0.64857, 0.59130, 0.46320]
+# sim_eta= [sim_eta[i]/eta_opt for i in range(len(sim_eta))]
+
+
+plt.plot(exp_1mm_flowrate, exp_1mm_head, color='k', linestyle='--', marker='^', label='Experiment- 1mm gap')
+
+# plt.plot(sim_flowrate, sim_head, color='b', label='Simulation @ $\epsilon=0$')
+
+plt.plot(15, 18.885819, "o", color='r')
+plt.plot(34, 21.030547, "o", color='r', label="Qw= 15,34,68,102,120 m3/h")
+plt.plot(68, 18.541008, "o", color='r')
+plt.plot(102, 13.723238, "o", color='r')
+plt.plot(120, 9.587210, "o", color='r')
+
+plt.xlabel('$Q$')
+plt.ylabel('$H$')
+
+plt.title("Head-Volumetric Flowrate Characteristic Plot")
+plt.legend()
+
+txt = "Experimental values - vs. simulation results"
+plt.figtext(0.6, -0.05, txt, wrap=True, horizontalalignment='center', fontsize=12)
+tikzplotlib.save('head_plot_1mm_exp.tex')
+
+plt.savefig('head_plot_1mm_exp.eps', format='eps', dpi=1000)
+
+plt.show()
+
+plt.savefig("head_plot_1mm_exp.png")
+
+####### plotting efficiency curve
+
+plt.plot(exp_1mm_flowrate, exp_1mm_eta, color='k', linestyle='--', marker='^', label='Experiment- 1mm gap')
+# plt.plot(sim_flowrate, sim_eta, color='b', label='Simulation @ $\epsilon=0$')
+
+plt.plot(15, 0.21435, "o", color='r')
+plt.plot(34, 0.49785, "o", color='r', label="Qw= 15,34,68,102,120 m3/h")
+plt.plot(68, 0.64857, "o", color='r')
+plt.plot(102, 0.59130, "o", color='r')
+plt.plot(120, 0.46320, 's', "o", color='r')
+
+plt.xlabel('$Q$')
+plt.ylabel('$\eta$')
+
+plt.title("Efficiency-Volumetric Flowrate Characteristic Plot")
+plt.legend()
+
+txt = "Experimental values - vs. simulation results"
+plt.figtext(0.6, -0.05, txt, wrap=True, horizontalalignment='center', fontsize=12)
+tikzplotlib.save('efficiency_plot_1mm_exp.tex')
+
+plt.savefig('efficiency_plot_1mm_exp.eps', format='eps', dpi=1000)
+
+plt.show()
+
+plt.savefig("efficiency_plot_1mm_exp.png")

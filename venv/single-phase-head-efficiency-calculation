@@ -1,0 +1,67 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+import sys
+import math
+import numpy as np
+import os
+
+## Head from fieldValueDelta
+## Efficiency from forcesIncompressible
+
+##steps to calculate:
+
+#0- set N rpm
+#1- change Qw
+#2- change files
+#3- change skip rows value
+
+###################################### CODE ############################################
+
+
+########################################## pressure difference einlesen und H berechnen
+
+n= 1450; rho= 997; g= 9.81; Qw= 15/3600     #pressure difference
+
+######################################################################################
+
+
+df1 = pd.read_csv('fieldValueDelta.dat', sep='\t', skiprows=1500, header=None)
+df1= df1.rename(columns={0:'time', 1:'del_p'})
+print(df1)
+#df1=df1.mean
+#del_p= df1['del_p'].mean
+del_p= df1['del_p'].mean(axis=0)
+#print(df1)
+print(del_p)
+h= del_p/g
+print('Head of the pump is: {:6f}'.format(h))
+
+
+########################## Create Dataframes from forces.dat #################################
+
+
+df = pd.read_csv('forces.dat', sep='\t', skiprows=1500, header=None)
+df = df.rename(columns={0:'time', 1:'bs'})
+def parse_col(row_iter):
+  row_iter=row_iter.replace(')) ((',',').replace(') (', ',').replace('))','').replace('((','').replace(' ',',').split(',')
+  return row_iter
+
+cols = ['f_pressure', 'f_viscous', 'f_porous', 'm_pressure', 'm_viscous', 'm_porous']
+df['bs'] = df['bs'].apply(lambda x : parse_col(x))
+data_df = df['bs'].apply(pd.Series)
+data_df= data_df.astype(np.float64)
+
+print(data_df)
+
+mean= np.mean(data_df)
+moment_yaxis= mean[10]+mean[13]
+
+###########################################
+
+omega= 2*math.pi*n/60
+Pu= rho * g * h * Qw
+print(Pu)
+P= moment_yaxis * omega
+eta= (Pu/P)* 100
+
+print('efficiency of the pump at flow rate {0:1f} m^3/h is {1:.3%}'.format(Qw*3600, eta/100))
