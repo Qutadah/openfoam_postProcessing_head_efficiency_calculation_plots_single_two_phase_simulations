@@ -1,0 +1,408 @@
+from matplotlib import pyplot as plt
+import numpy as np
+import tikzplotlib
+
+## change all values to the 1%, 3%, and 5% case....
+
+# general plot exp all IGVFS
+
+#1. Förderhöhe/ Qw: plot 0.5mm + 1.00 gap exp- 1,3 5% with all models (EE2F Mono/MUSIG & Hybrid Mono/MUSIG) Förderhöhe
+
+#2. Wirkungsgrad/Qw: plot 1.0 mm gap exp- 1,3 5% with all models (EE2F Mono/MUSIG & Hybrid Mono/MUSIG) Förderhöhe
+
+#3. plot Förderhöhe mit IGVF all models
+#4. plot Wirkungsgrad mit IGVF all models
+
+
+################## # general plot exp all IGVFS- 0.5 mm gap, 1450 rpm ############################
+
+
+Q_opt= 68.1064652357081
+H_opt= 17.1704258430048
+eta_opt= 0.7023
+
+################# flowrate ##################
+
+exp_half_mm_flowrate_IGVF_0 = [6.89464646102859, 14.2686652014031, 17.2288667358457, 21.5479952231049, 28.0522350355983, 35.2673452667893, 42.0868242107333, 48.8784127257766, 51.9811160065236, 56.1568048916759, 63.1267549231651, 69.5698218554261, 77.2707991436126, 84.0677778184416, 87.6790830254556, 90.5895963817836, 97.9094735667109, 105.172865925729, 111.976406811178, 119.407409442961, 124.745117737353]
+exp_half_mm_flowrate_IGVF_1 = [14.3881982792168, 17.1421467460691, 27.2872233524919, 34.4423325680197, 41.7052560806276, 51.1251656100156, 61.3478214055302, 69.0359076246622, 75.7215567067268, 86.1649971216919, 95.1027023181319, 102.909706248343, 109.113237796724, 115.943498811125]
+exp_half_mm_flowrate_IGVF_2 = [17.1008961129933, 27.5801967125386, 34.4929583504797, 41.5069717861714, 51.4612645789983, 61.2554762274029, 68.5226192459466, 75.2795190125706, 84.2191865056755, 95.4013592883945, 102.686109481752, 109.456368362903, 116.044750003516]
+exp_half_mm_flowrate_IGVF_3 = [18.953893123567, 28.8406846527011, 34.5342089928688, 41.551035115868, 51.1476660281422, 61.8053285911681, 68.0627682194116, 75.7946822181347, 85.3301403433086, 94.7668962687254, 102.112349955737, 108.711513070762, 116.617102748155]
+exp_half_mm_flowrate_IGVF_4 = [17.7641872636973, 26.9506556954235, 41.5327535517515, 51.444857953489, 61.0023473896088, 68.2905842497947, 74.9387323245409, 85.4857681080701, 95.2686714887619, 102.307821935415, 109.158707498014, 115.915372906625]
+exp_half_mm_flowrate_IGVF_5 = [81.5693959206335, 97.9236299902192, 106.879142200946]
+exp_half_mm_flowrate_IGVF_6 = [78.7452280879013, 94.1761977285138, 104.590669086575]
+exp_half_mm_flowrate_IGVF_7 = [40.8181800082325, 53.8316755801435, 101.029614871739, 106.933705186843]
+exp_half_mm_flowrate_IGVF_9 = [40.2320460140705, 66.1800513625139, 86.9368526995174, 91.8113649845115]
+exp_half_mm_flowrate_IGVF_11 = [23.7232276037338, 38.1312639176846, 58.3741198316211, 80.1417489558451]
+
+################# efficiency ##################
+
+exp_half_mm_efficiency_IGVF_0 = [0.174500478825753, 0.326911769359996, 0.376383900459926, 0.440459959734526, 0.523654614162655, 0.593778663473744, 0.640391795097851, 0.678566315158144, 0.68901150907363, 0.692764377071364, 0.705466759461417, 0.70217649145557, 0.691745670720509, 0.675363524994291, 0.669211095428003, 0.656805347326249, 0.629629309973216, 0.604821507624601, 0.556484748824163, 0.469382934266746, 0.38564853411593]
+exp_half_mm_efficiency_IGVF_1 = [0.325901821735251, 0.375318068818671, 0.513668987239695, 0.587353576719486, 0.635985331022562, 0.683430001407621, 0.700058142652668, 0.697631500468534, 0.694138394021219, 0.666421694378936, 0.634878886680076, 0.608870943394561, 0.561406122557528, 0.489741359221187]
+exp_half_mm_efficiency_IGVF_2 = [0.361249967320976, 0.500854951543839, 0.573904391016464, 0.630209238511624, 0.68159527865591, 0.696259952397461, 0.692007474937655, 0.684231412607549, 0.660778465219302, 0.626439357644123, 0.597470915793243, 0.540023390651641, 0.441571758043354]
+exp_half_mm_efficiency_IGVF_3 = [0.37296705361754, 0.497855783715939, 0.557869232376173, 0.613177198913752, 0.667175735739561, 0.69058388449267, 0.683498724005823, 0.676926287629196, 0.647699746121693, 0.612667402036607, 0.579613299816348, 0.523863897798908, 0.379856618953098]
+exp_half_mm_efficiency_IGVF_4 = [0.326027353548233, 0.43719102420363, 0.588701494081914, 0.651396286801545, 0.673801795221491, 0.668086778963717, 0.655615652704759, 0.64052176225967, 0.597492041022917, 0.557918405858391, 0.486934324271774, 0.3480176241611]
+exp_half_mm_efficiency_IGVF_5 = [0.620569876758446, 0.555186613129263, 0.45628936362174]
+exp_half_mm_efficiency_IGVF_6 = [0.521801071864614, 0.534059590301126, 0.422906993208846]
+exp_half_mm_efficiency_IGVF_7 = [0.324127820841165, 0.36745309818109, 0.350661443763709, 0.180641509939179]
+exp_half_mm_efficiency_IGVF_9 = [0.282804570325485, 0.316774346893854, 0.225133665034789, 0.155759054123296]
+exp_half_mm_efficiency_IGVF_11 = [0.17243273116934, 0.250432248673434, 0.209201182012168, 0.13661150783985]
+
+# x 100
+
+exp_half_mm_efficiency_IGVF_0 = [exp_half_mm_efficiency_IGVF_0[i]*100 for i in range(len(exp_half_mm_efficiency_IGVF_0))]
+exp_half_mm_efficiency_IGVF_1 = [exp_half_mm_efficiency_IGVF_1[i]*100 for i in range(len(exp_half_mm_efficiency_IGVF_1))]
+exp_half_mm_efficiency_IGVF_2 = [exp_half_mm_efficiency_IGVF_2[i]*100 for i in range(len(exp_half_mm_efficiency_IGVF_2))]
+exp_half_mm_efficiency_IGVF_3 = [exp_half_mm_efficiency_IGVF_3[i]*100 for i in range(len(exp_half_mm_efficiency_IGVF_3))]
+exp_half_mm_efficiency_IGVF_4 = [exp_half_mm_efficiency_IGVF_4[i]*100 for i in range(len(exp_half_mm_efficiency_IGVF_4))]
+exp_half_mm_efficiency_IGVF_5 = [exp_half_mm_efficiency_IGVF_5[i]*100 for i in range(len(exp_half_mm_efficiency_IGVF_5))]
+exp_half_mm_efficiency_IGVF_6 = [exp_half_mm_efficiency_IGVF_6[i]*100 for i in range(len(exp_half_mm_efficiency_IGVF_6))]
+exp_half_mm_efficiency_IGVF_7 = [exp_half_mm_efficiency_IGVF_7[i]*100 for i in range(len(exp_half_mm_efficiency_IGVF_7))]
+#exp_half_mm_efficiency_IGVF_9 = [exp_half_mm_efficiency_IGVF_9[i]*100 for i in range(len(exp_half_mm_efficiency_IGVF_9)]
+exp_half_mm_efficiency_IGVF_11 = [exp_half_mm_efficiency_IGVF_11[i]*100 for i in range(len(exp_half_mm_efficiency_IGVF_11))]
+
+################# head ##################
+
+exp_half_mm_head_IGVF_0 = [21.1146138887379, 20.993950351609, 20.9798530902766, 20.9251483889966, 20.807426452755, 20.2970005213201, 19.7418097315093, 19.2064461186863, 18.9300586319689, 18.5206725167313, 17.8372860128804, 17.1044467253123, 16.029, 15, 14.52, 14, 12.855, 11.849, 10.42, 8.34, 6.56]
+exp_half_mm_head_IGVF_1 = [19.578, 19.907, 20.479, 20.157, 19.574, 18.118, 17.884, 16.958, 16.083, 14.486, 13.092, 11.986, 10.606, 8.8211 ]
+exp_half_mm_head_IGVF_2 = [19.1614018084046, 19.4972116666242, 19.6447008280795, 19.3643256437245, 18.6377200244006, 17.6404844542613, 16.737801745309, 15.8418594923818, 14.4284411642211, 12.7622534006993, 11.6704916879889, 10.0465394324351, 7.85720360555484]
+exp_half_mm_head_IGVF_3 = [18.5627962492933, 18.9387641872963, 19.0065552256766, 18.8290740830457, 18.4515339691887, 17.3711173218265, 16.5362820433349, 15.4475813841681, 13.9320562180896, 12.4306277241591, 11.2397067555317, 9.65872096250436, 6.62059267883446]
+exp_half_mm_head_IGVF_4 = [16.7100002621442, 16.6190131801364, 17.8475081107792, 17.8449807421731, 17.1511755671112, 16.1698624888212, 15.2217147830596, 13.5676577621692, 11.8741453441336, 10.6120643633619, 8.79987511985164, 5.95649889930893]
+exp_half_mm_head_IGVF_5 = [13.162, 10.601, 8.108]
+exp_half_mm_head_IGVF_6 = [10.109, 10.067, 7.3029]
+exp_half_mm_head_IGVF_7 = [6.4936, 6.906, 5.8345, 2.83]
+#exp_half_mm_head_IGVF_9 = []                                # no values in excel....
+exp_half_mm_head_IGVF_11 = [4.8056, 3.8053, 3.3446, 2.6597]
+
+
+#exp_half_mm_flowrate= [exp_half_mm_flowrate[i]/Q_opt for i in range(len(exp_half_mm_flowrate))]
+
+#exp_half_mm_head= [exp_half_mm_head[i]/H_opt for i in range(len(exp_half_mm_head))]
+
+
+
+############################################ plotting head curve #################################################
+
+plt.plot(exp_half_mm_flowrate_IGVF_0, exp_half_mm_head_IGVF_0, color='b', linestyle='--', marker='^', label='IGVF 0%')
+plt.plot(exp_half_mm_flowrate_IGVF_1, exp_half_mm_head_IGVF_1, color='k', linestyle='--', marker='o', label='IGVF 1%')
+plt.plot(exp_half_mm_flowrate_IGVF_2, exp_half_mm_head_IGVF_2, color='y', linestyle='--', marker='v', label='IGVF 2%')
+plt.plot(exp_half_mm_flowrate_IGVF_3, exp_half_mm_head_IGVF_3, color='r', linestyle='--', marker='s', label='IGVF 3%')
+plt.plot(exp_half_mm_flowrate_IGVF_4, exp_half_mm_head_IGVF_4, color='g', linestyle='--', marker='s', label='IGVF 4%')
+plt.plot(exp_half_mm_flowrate_IGVF_5, exp_half_mm_head_IGVF_5, color='k', linestyle='--', marker='*', label='IGVF 5%')
+plt.plot(exp_half_mm_flowrate_IGVF_6, exp_half_mm_head_IGVF_6, color='m', linestyle='--', marker='H', label='IGVF 6%')
+plt.plot(exp_half_mm_flowrate_IGVF_7, exp_half_mm_head_IGVF_7, color='b', linestyle='--', marker='x', label='IGVF 7%')
+#plt.plot(exp_half_mm_flowrate_IGVF_9, exp_half_mm_head_IGVF_9, color='g', linestyle='--', marker='4(CARETLEFT)', label='IGVF 9%')
+plt.plot(exp_half_mm_flowrate_IGVF_11, exp_half_mm_head_IGVF_11, color='c', linestyle='--', marker='H', label='IGVF 11%')
+
+
+
+
+
+
+#plt.plot(sim_flowrate, sim_head, color='b', label='Simulation @ $\epsilon=0$')
+
+# plt.plot(15, 18.885819, 'o', color='r')
+# plt.plot(34, 21.030547, 'o', color='r', label= ('Qw = 68 m3/h'))
+# plt.plot(68, 18.541008, 'o', color='r')
+# plt.plot(102, 13.723238, 'o', color='r')
+# plt.plot(120, 9.587210, 'o', color='r')
+
+plt.xlabel('$Q (m3/h)$')
+plt.ylabel('$H (m)$')
+
+plt.title("Volumetric Flowrate-Head Characteristic Plot- EXPERIMENT 0.5mm")
+plt.legend()
+
+txt="Experimental plots 0.5 mm gap"
+plt.figtext(0.6, -0.05, txt, wrap=True, horizontalalignment='center', fontsize=12)
+tikzplotlib.save('head_plot_0.5mm_exp.tex')
+
+plt.show()
+
+plt.savefig("head_plot_0.5mm_exp.png")
+plt.show()
+
+####### plotting efficiency curve
+
+plt.plot(exp_half_mm_flowrate_IGVF_0, exp_half_mm_efficiency_IGVF_0, color='b', linestyle='--', marker='^', label='IGVF 0%')
+plt.plot(exp_half_mm_flowrate_IGVF_1, exp_half_mm_efficiency_IGVF_1, color='k', linestyle='--', marker='o', label='IGVF 1%')
+plt.plot(exp_half_mm_flowrate_IGVF_2, exp_half_mm_efficiency_IGVF_2, color='y', linestyle='--', marker='v', label='IGVF 2%')
+plt.plot(exp_half_mm_flowrate_IGVF_3, exp_half_mm_efficiency_IGVF_3, color='r', linestyle='--', marker='s', label='IGVF 3%')
+plt.plot(exp_half_mm_flowrate_IGVF_4, exp_half_mm_efficiency_IGVF_4, color='g', linestyle='--', marker='s', label='IGVF 4%')
+plt.plot(exp_half_mm_flowrate_IGVF_5, exp_half_mm_efficiency_IGVF_5, color='k', linestyle='--', marker='*', label='IGVF 5%')
+plt.plot(exp_half_mm_flowrate_IGVF_6, exp_half_mm_efficiency_IGVF_6, color='m', linestyle='--', marker='H', label='IGVF 6%')
+plt.plot(exp_half_mm_flowrate_IGVF_7, exp_half_mm_efficiency_IGVF_7, color='b', linestyle='--', marker='x', label='IGVF 7%')
+plt.plot(exp_half_mm_flowrate_IGVF_9, exp_half_mm_efficiency_IGVF_9, color='g', linestyle='--', marker='h', label='IGVF 9%')
+plt.plot(exp_half_mm_flowrate_IGVF_11, exp_half_mm_efficiency_IGVF_11, color='c', linestyle='--', marker='H', label='IGVF 11%')
+
+
+
+
+
+
+#plt.plot(sim_flowrate, sim_head, color='b', label='Simulation @ $\epsilon=0$')
+
+# plt.plot(15, 18.885819, 'o', color='r')
+# plt.plot(34, 21.030547, 'o', color='r', label= ('Qw = 68 m3/h'))
+# plt.plot(68, 18.541008, 'o', color='r')
+# plt.plot(102, 13.723238, 'o', color='r')
+# plt.plot(120, 9.587210, 'o', color='r')
+
+plt.xlabel('$Q (m3/h)$')
+plt.ylabel('$\eta \%$')
+
+plt.title("Volumetric Flowrate- Efficiency Characteristic Plot- EXPERIMENT 0.5 mm")
+plt.legend()
+
+txt="Experimental plots 0.5 mm gap"
+plt.figtext(0.6, -0.05, txt, wrap=True, horizontalalignment='center', fontsize=12)
+tikzplotlib.save('efficiency_plot_0.5mm_exp.tex')
+
+plt.show()
+
+plt.savefig("efficiency_plot_0.5mm_exp.png")
+plt.show()
+
+
+################## # general plot exp all IGVFS- 1 mm gap, 1450 rpm ############################
+
+
+
+####################### experiment 1 mm gap
+
+#plt.rcParams.update({"text.usetex": True, "font.family": "sans-serif", "font.sans-serif": ["Helvetica"]})
+
+Q_opt= 65.8835691605852
+H_opt= 16.6082617491909
+eta_opt= 0.671085481952823
+
+################# flowrate ##################
+
+exp_1_mm_flowrate_IGVF_0 = [6.89, 14.67, 17.99, 21.3258, 28.525, 36.259, 43.761, 49.264, 53.115, 56.550, 63.94, 70.280, 77.18, 84.40, 87.981, 92.102, 99.302, 105.17, 112.97, 120.99]
+exp_1_mm_flowrate_IGVF_1 = [13.3930269110947, 16.9457373715937, 27.767699513957, 33.5685693606735, 40.1311693288387, 49.7170188970866, 59.0204423613848, 66.8149362638595, 72.269570244849, 82.4904102221134, 92.9521324247122, 98.8966761291027, 111.721403165161, 118.952744020521]
+exp_1_mm_flowrate_IGVF_2 = [13.3700578188523, 16.6785457212477, 26.8803422193975, 33.8381048239769, 39.5124101772906, 50.0235859811308, 59.3406033091249, 66.9761887326839, 73.1255794450643, 82.702288194001, 92.7088478341699, 98.9623019978404, 111.555462828278, 119.992741024494]
+exp_1_mm_flowrate_IGVF_3 = [17.1351154282689, 27.4569134455175, 34.1456091724337, 39.8067893594505, 49.3527946569027, 59.8674864083531, 66.2927405670287, 72.7163545176389, 82.2344685107472, 91.9030536472798, 99.3438701838254, 112.296567833423, 118.982891342044]
+exp_1_mm_flowrate_IGVF_4 = [35.7961032673718, 41.8604146078231, 50.0793681241574, 59.6392016060653, 66.4596182614567, 72.9807332292202, 83.1987021625044, 91.8299278005958, 99.0246468171477, 110.874359025061, 116.15959559977, ]
+exp_1_mm_flowrate_IGVF_5 = [59.1100686252112, 66.1556758642191, 72.9024510741227, 83.1346700996153, 92.5775018393985, 98.8538317441931, 111.70265263915]
+exp_1_mm_flowrate_IGVF_6 = [77.4351456075899, 83.2700470447532, 92.9498824834815, 99.1283358246079, 110.553447923063, ]
+exp_1_mm_flowrate_IGVF_7 = [96.9039892464867, 105.481682798265]
+exp_1_mm_flowrate_IGVF_9 = [47.9479411303994, 60.202835156023, 73.896216323971, 86.3570938616983, 94.1257947891942, ]
+exp_1_mm_flowrate_IGVF_11 = [23.7232276037338, 38.1312639176846, 58.3741198316211, 80.1417489558451]
+
+################# efficiency ##################
+
+
+exp_1_mm_efficiency_IGVF_0 = [0.170948593684357, 0.326165250990398, 0.380304663741982, 0.427069156960923, 0.515307640308582, 0.582613433337575, 0.628117477023122, 0.653377812879519, 0.66077879260541, 0.665759899695237, 0.671117713078994, 0.664902911221885, 0.658691499985318, 0.639534093357495, 0.631379439517751, 0.618882739951461, 0.583538697476478, 0.547126101428541, 0.487730166298129, 0.375489911550044]
+exp_1_mm_efficiency_IGVF_1 = [0.302914314988299, 0.363831974394094, 0.50608726270007, 0.561860309483968, 0.607064438943082, 0.655811451182288, 0.665822085023773, 0.673280524193378, 0.66368833052875, 0.642857678886003, 0.605170774606199, 0.573682861601887, 0.459453428955131, 0.356051099328731]
+exp_1_mm_efficiency_IGVF_2 = [0.285828910450361, 0.348385023616733, 0.486954205182103, 0.558184694277417, 0.596777219779945, 0.654218170375021, 0.662826052827042, 0.667015195771334, 0.656538090185224, 0.635732215398657, 0.602583811821459, 0.562487679045343, 0.432760714848518, 0.290420852660651]
+exp_1_mm_efficiency_IGVF_3 = [0.306025315704655, 0.476315288632575, 0.5492727921567, 0.590497371210897, 0.642722873947018, 0.65537398728821, 0.653343475204726, 0.635448950880489, 0.628853593095042, 0.593441889226751, 0.54554978874412, 0.390497266427522, 0.22194950220505]
+exp_1_mm_efficiency_IGVF_4 = [0.537854670373875, 0.575390080574741, 0.617398123607162, 0.6320613660265, 0.65961854371138, 0.639199912767352, 0.61729834806562, 0.584418774549979, 0.530802394871965, 0.36804796958515, 0.200522558767769]
+exp_1_mm_efficiency_IGVF_5 = [0.63056598693032, 0.632123245589745, 0.613284780770895, 0.595779301730468, 0.550246240491142, 0.500876426948438, 0.251798275894568]
+exp_1_mm_efficiency_IGVF_6 = [0.576861471079513, 0.56033046961523, 0.56033046961523, 0.459274303140781, 0.182050042593484]
+exp_1_mm_efficiency_IGVF_7 = [0.423, 0.215]
+exp_1_mm_efficiency_IGVF_9 = [0.305, 0.3167, 0.29844, 0.242, 0.1847]
+exp_1_mm_efficiency_IGVF_11 = [0.1724, 0.2504, 0.209, 0.136611]
+
+
+################# x 100
+
+
+exp_1_mm_efficiency_IGVF_0 = [exp_1_mm_efficiency_IGVF_0[i]*100 for i in range(len(exp_1_mm_efficiency_IGVF_0))]
+exp_1_mm_efficiency_IGVF_1 = [exp_1_mm_efficiency_IGVF_1[i]*100 for i in range(len(exp_1_mm_efficiency_IGVF_1))]
+exp_1_mm_efficiency_IGVF_2 = [exp_1_mm_efficiency_IGVF_2[i]*100 for i in range(len(exp_1_mm_efficiency_IGVF_2))]
+exp_1_mm_efficiency_IGVF_3 = [exp_1_mm_efficiency_IGVF_3[i]*100 for i in range(len(exp_1_mm_efficiency_IGVF_3))]
+exp_1_mm_efficiency_IGVF_4 = [exp_1_mm_efficiency_IGVF_4[i]*100 for i in range(len(exp_1_mm_efficiency_IGVF_4))]
+exp_1_mm_efficiency_IGVF_5 = [exp_1_mm_efficiency_IGVF_5[i]*100 for i in range(len(exp_1_mm_efficiency_IGVF_5))]
+exp_1_mm_efficiency_IGVF_6 = [exp_1_mm_efficiency_IGVF_6[i]*100 for i in range(len(exp_1_mm_efficiency_IGVF_6))]
+exp_1_mm_efficiency_IGVF_7 = [exp_1_mm_efficiency_IGVF_7[i]*100 for i in range(len(exp_1_mm_efficiency_IGVF_7))]
+exp_1_mm_efficiency_IGVF_9 = [exp_1_mm_efficiency_IGVF_9[i]*100 for i in range(len(exp_1_mm_efficiency_IGVF_9))]
+exp_1_mm_efficiency_IGVF_11 = [exp_1_mm_efficiency_IGVF_11[i]*100 for i in range(len(exp_1_mm_efficiency_IGVF_11))]
+
+################# head ##################
+
+exp_1_mm_head_IGVF_0 = [20.7833880094633, 20.6714514168378, 20.6277555441301, 20.5214914573976, 20.2485296668251, 19.5815715766819, 18.9399998050011, 18.4934326690508, 18.1091805139214, 17.7610705761421, 16.9032639117875, 16.0697203931243, 15.0965791852244, 13.9735055934955, 13.4653257040837, 12.8242034800348, 11.589052891273, 10.3980195580552, 8.72433370104207, 6.29888014443649]
+exp_1_mm_head_IGVF_1 = [19.474970592573, 19.7012027022053, 20.0636911207756, 19.59, 19.0154, 18.263, 17.2, 16.3, 15.5, 13.98, 12.27, 11.249, 8.16, 5.94]
+exp_1_mm_head_IGVF_2 = [18.034, 18.745, 19.2, 19.27, 18.18, 17.9904, 16.9421, 16.005, 15.132, 13.67, 12.1, 10.922, 7.6, 4.72]
+exp_1_mm_head_IGVF_3 = [15.83, 18.58, 18.70, 18.45, 17.82, 16.65, 15.88, 15.04, 13.49, 11.89, 10.44, 6.74, 3.58]
+exp_1_mm_head_IGVF_4 = [17.48, 17.59, 17.48, 16.53, 15.5, 14.54, 12.93, 11.47, 9.9, 6.28, 3.22]
+exp_1_mm_head_IGVF_5 = [15.75, 15, 13.95, 12.21, 10.48, 9.16, 4.13]
+exp_1_mm_head_IGVF_6 = [11.81, 11.02, 9.53, 8.14, 2.88]
+exp_1_mm_head_IGVF_7 = [7.3, 3.41]
+exp_1_mm_head_IGVF_9 = [5.13, 5, 4.5, 3.62, 2.75]
+exp_1_mm_head_IGVF_11 = [4.8, 3.8, 3.34, 2.659]
+
+
+#exp_half_mm_flowrate= [exp_half_mm_flowrate[i]/Q_opt for i in range(len(exp_half_mm_flowrate))]
+#exp_half_mm_head= [exp_half_mm_head[i]/H_opt for i in range(len(exp_half_mm_head))]
+
+
+
+############################################ plotting head curve #################################################
+
+plt.plot(exp_1_mm_flowrate_IGVF_0, exp_1_mm_head_IGVF_0, color='b', linestyle='--', marker='^', label='IGVF 0%')
+plt.plot(exp_1_mm_flowrate_IGVF_1, exp_1_mm_head_IGVF_1, color='k', linestyle='--', marker='o', label='IGVF 1%')
+plt.plot(exp_1_mm_flowrate_IGVF_2, exp_1_mm_head_IGVF_2, color='y', linestyle='--', marker='v', label='IGVF 2%')
+plt.plot(exp_1_mm_flowrate_IGVF_3, exp_1_mm_head_IGVF_3, color='r', linestyle='--', marker='s', label='IGVF 3%')
+plt.plot(exp_1_mm_flowrate_IGVF_4, exp_1_mm_head_IGVF_4, color='g', linestyle='--', marker='s', label='IGVF 4%')
+plt.plot(exp_1_mm_flowrate_IGVF_5, exp_1_mm_head_IGVF_5, color='k', linestyle='--', marker='*', label='IGVF 5%')
+plt.plot(exp_1_mm_flowrate_IGVF_6, exp_1_mm_head_IGVF_6, color='m', linestyle='--', marker='H', label='IGVF 6%')
+plt.plot(exp_1_mm_flowrate_IGVF_7, exp_1_mm_head_IGVF_7, color='b', linestyle='--', marker='x', label='IGVF 7%')
+#plt.plot(exp_1_mm_flowrate_IGVF_9, exp_1_mm_head_IGVF_9, color='g', linestyle='--', marker='4(CARETLEFT)', label='IGVF 9%')
+plt.plot(exp_1_mm_flowrate_IGVF_11, exp_1_mm_head_IGVF_11, color='c', linestyle='--', marker='H', label='IGVF 11%')
+
+
+
+#plt.plot(sim_flowrate, sim_head, color='b', label='Simulation @ $\epsilon=0$')
+
+# plt.plot(15, 18.885819, 'o', color='r')
+# plt.plot(34, 21.030547, 'o', color='r', label= ('Qw = 68 m3/h'))
+# plt.plot(68, 18.541008, 'o', color='r')
+# plt.plot(102, 13.723238, 'o', color='r')
+# plt.plot(120, 9.587210, 'o', color='r')
+
+plt.xlabel('$Q (m3/h)$')
+plt.ylabel('$H (m)$')
+
+plt.title("Volumetric Flowrate-Head Characteristic Plot- EXPERIMENT 1 mm")
+plt.legend()
+
+txt="Experimental plots 1 mm gap"
+plt.figtext(0.6, -0.05, txt, wrap=True, horizontalalignment='center', fontsize=12)
+tikzplotlib.save('head_plot_1mm_exp.tex')
+
+plt.show()
+
+plt.savefig("head_plot_1mm_exp.png")
+plt.show()
+
+####### plotting efficiency curve
+
+plt.plot(exp_1_mm_flowrate_IGVF_0, exp_1_mm_efficiency_IGVF_0, color='b', linestyle='--', marker='^', label='IGVF 0%')
+plt.plot(exp_1_mm_flowrate_IGVF_1, exp_1_mm_efficiency_IGVF_1, color='k', linestyle='--', marker='o', label='IGVF 1%')
+plt.plot(exp_1_mm_flowrate_IGVF_2, exp_1_mm_efficiency_IGVF_2, color='y', linestyle='--', marker='v', label='IGVF 2%')
+plt.plot(exp_1_mm_flowrate_IGVF_3, exp_1_mm_efficiency_IGVF_3, color='r', linestyle='--', marker='s', label='IGVF 3%')
+plt.plot(exp_1_mm_flowrate_IGVF_4, exp_1_mm_efficiency_IGVF_4, color='g', linestyle='--', marker='s', label='IGVF 4%')
+plt.plot(exp_1_mm_flowrate_IGVF_5, exp_1_mm_efficiency_IGVF_5, color='k', linestyle='--', marker='*', label='IGVF 5%')
+plt.plot(exp_1_mm_flowrate_IGVF_6, exp_1_mm_efficiency_IGVF_6, color='m', linestyle='--', marker='H', label='IGVF 6%')
+plt.plot(exp_1_mm_flowrate_IGVF_7, exp_1_mm_efficiency_IGVF_7, color='b', linestyle='--', marker='x', label='IGVF 7%')
+plt.plot(exp_1_mm_flowrate_IGVF_9, exp_1_mm_efficiency_IGVF_9, color='g', linestyle='--', marker='h', label='IGVF 9%')
+plt.plot(exp_1_mm_flowrate_IGVF_11, exp_1_mm_efficiency_IGVF_11, color='c', linestyle='--', marker='H', label='IGVF 11%')
+
+
+
+
+
+
+#plt.plot(sim_flowrate, sim_head, color='b', label='Simulation @ $\epsilon=0$')
+
+# plt.plot(15, 18.885819, 'o', color='r')
+# plt.plot(34, 21.030547, 'o', color='r', label= ('Qw = 68 m3/h'))
+# plt.plot(68, 18.541008, 'o', color='r')
+# plt.plot(102, 13.723238, 'o', color='r')
+# plt.plot(120, 9.587210, 'o', color='r')
+
+plt.xlabel('$Q (m3/h)$')
+plt.ylabel('$\eta \%$')
+
+plt.title("Volumetric Flowrate- Efficiency Characteristic Plot- EXPERIMENT 1 mm")
+plt.legend()
+
+txt="Experimental plots 1 mm gap"
+plt.figtext(0.6, -0.05, txt, wrap=True, horizontalalignment='center', fontsize=12)
+tikzplotlib.save('efficiency_plot_1mm_exp.tex')
+
+plt.show()
+
+plt.savefig("efficiency_plot_1mm_exp.png")
+plt.show()
+
+
+
+#1. Förderhöhe/ Qw: plot 0.5mm + 1.00 gap exp- 1,3 5% with all models (EE2F Mono/MUSIG & Hybrid Mono/MUSIG) Förderhöhe
+
+
+# plt.rcParams.update({"text.usetex": True, "font.family": "sans-serif", "font.sans-serif": ["Helvetica"]})
+
+####################### experiment
+
+Q_opt = 68.1064652357081
+H_opt = 17.1704258430048
+eta_opt = 0.7023
+
+exp_half_mm_flowrate = [18.95389312, 28.84068465, 34.53420899, 41.55103512, 51.14766603, 61.80532859, 68.06276822,
+                        75.79468222, 85.33014034, 94.76689627, 102.11235, 108.7115131, 116.6171027]
+# exp_half_mm_flowrate= [exp_half_mm_flowrate[i]/Q_opt for i in range(len(exp_half_mm_flowrate))]
+
+exp_half_mm_head = [18.56279625, 18.93876419, 19.00655523, 18.82907408, 18.45153397, 17.37111732, 16.53628204,
+                    15.44758138, 13.93205622, 12.43062772, 11.23970676, 9.658720963, 6.620592679]
+# exp_half_mm_head= [exp_half_mm_head[i]/H_opt for i in range(len(exp_half_mm_head))]
+
+exp_half_mm_eta = [0.372967054, 0.497855784, 0.557869232, 0.613177199, 0.667175736, 0.690583884, 0.683498724,
+                   0.676926288, 0.647699746, 0.612667402, 0.5796133, 0.523863898, 0.379856619]
+exp_half_mm_eta = [exp_half_mm_eta[i] * 100 for i in range(len(exp_half_mm_eta))]
+
+######################## simulation
+
+sim_flowrate = [67.5, 68.4, 69.6]
+# sim_flowrate= [sim_flowrate[i]/Q_opt for i in range(len(sim_flowrate))]
+
+# TODO: replace head simulation from calculation script, problem with copying scp -r rababqjt@ws18:
+
+
+sim_head = [18.885819, 21.030547, 18.541008, 13.723238, 9.587210]
+# sim_head= [sim_head[i]/H_opt for i in range(len(sim_head))]
+
+sim_eta = [0.21435, 0.49785, 0.64857, 0.59130, 0.46320]
+# sim_eta= [sim_eta[i]/eta_opt for i in range(len(sim_eta))]
+
+### plotting head curve
+
+plt.plot(exp_half_mm_flowrate, exp_half_mm_head, color='k', linestyle='--', marker='^', label='Experiment- 0.5mm gap')
+# plt.plot(sim_flowrate, sim_head, color='b', label='Simulation @ $\epsilon=0$')
+
+plt.plot(15, 18.885819, 'o', color='r')
+plt.plot(34, 21.030547, 'o', color='r', label=('Qw = 68 m3/h'))
+plt.plot(68, 18.541008, 'o', color='r')
+plt.plot(102, 13.723238, 'o', color='r')
+plt.plot(120, 9.587210, 'o', color='r')
+
+plt.xlabel('$Q$')
+plt.ylabel('$H$')
+
+plt.title("Head-Volumetric Flowrate Characteristic Plot")
+plt.legend()
+
+txt = "Experimental values - vs. simulation results"
+plt.figtext(0.6, -0.05, txt, wrap=True, horizontalalignment='center', fontsize=12)
+tikzplotlib.save('head_plot_0.5mm_exp.tex')
+
+plt.show()
+
+plt.savefig("head_plot_0.5mm_exp.png")
+
+####### plotting efficiency curve
+
+plt.plot(exp_half_mm_flowrate, exp_half_mm_eta, color='k', linestyle='--', marker='^', label='Experiment- 0.5mm gap')
+# plt.plot(sim_flowrate, sim_eta, color='b', label='Simulation @ $\epsilon=0$')
+
+
+plt.plot(15, 21.435, 'o', color='r')
+plt.plot(34, 49.785, 'o', color='r', label=('Qw = 68 m3/h'))
+plt.plot(68, 64.857, 'o', color='r')
+plt.plot(102, 59.130, 'o', color='r')
+plt.plot(120, 46.320, 'o', color='r')
+
+plt.xlabel('$Q$')
+plt.ylabel('$\eta$')
+
+plt.title("Efficiency-Volumetric Flowrate Characteristic Plot")
+plt.legend()
+
+txt = "Experimental values- vs. simulation results"
+plt.figtext(0.6, -0.05, txt, wrap=True, horizontalalignment='center', fontsize=12)
+tikzplotlib.save('efficiency_plot_0.5mm_exp.tex')
+
+plt.show()
+
+plt.savefig("efficiency_plot_0.5mm_exp.png")
+
+
